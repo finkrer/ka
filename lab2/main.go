@@ -24,7 +24,7 @@ type point struct {
 }
 
 func main() {
-	in := "in"
+	in := "In2.txt"
 	m, o, d := readFile(in)
 	g := createGraph(m)
 	orig := g.nodes[o]

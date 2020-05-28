@@ -18,14 +18,40 @@ type graphInfo struct {
 }
 
 func main() {
-	in := "in"
+	in := "In2.txt"
 	m := readFile(in)
 	g := createGraph(m)
-	if isBipartite(&g, g.nodes[0]) {
-		fmt.Println("Y")
-	} else {
+	if !isBipartite(&g, g.nodes[0]) {
 		fmt.Println("N")
+		return
 	}
+	fmt.Println("Y")
+	part1 := make([]int, 0)
+	part2 := make([]int, 0)
+	for i, v := range g.nodes {
+		if g.colors[v] {
+			part1 = append(part1, i+1)
+		} else {
+			part2 = append(part2, i+1)
+		}
+	}
+	if part1[0] < part2[0] {
+		printParts(part1, part2)
+	} else {
+		printParts(part2, part1)
+	}
+}
+
+func printPart(part []int) {
+	for _, v := range part {
+		fmt.Println(v)
+	}
+}
+
+func printParts(part1 []int, part2 []int) {
+	printPart(part1)
+	fmt.Println("0")
+	printPart(part2)
 }
 
 func createGraph(matrix [][]bool) graphInfo {
